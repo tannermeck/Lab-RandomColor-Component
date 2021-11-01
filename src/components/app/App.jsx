@@ -1,6 +1,6 @@
 import React from 'react';
-import ColorChanger from '../color-changer/ColorChanger';
+import RandomColor from '../../containers/RandomColor';
 
 export default function App() {
-  return <ColorChanger />;
+  return <RandomColor />;
 }
