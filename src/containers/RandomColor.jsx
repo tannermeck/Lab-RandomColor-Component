@@ -6,19 +6,33 @@ class RandomColor extends Component {
                 currentColor: 'blue',
                 previous: '' }
 
-    handleColor = () => {       
+    componentDidMount = () => {       
+        this.timerId = setInterval(() =>
+            this.tick(), 1000
+            );
+    }
+    
+    componentWillUnmount(){
+        clearInterval(this.timerId);
+    }
+
+    tick(){
+        this.setState(prevState => ({
+            previous: prevState.currentColor
+        }))
         const randomNumber = Math.floor(Math.random() * 7)
-        setTimeout(()=> {
-            this.setState({ currentColor: this.state.colors[randomNumber]})
-        }, 1000)
+        this.setState({
+            currentColor: this.state.colors[randomNumber]
+        })
+        
     }
 
     render() {
+        console.log('CURRENT', this.state.currentColor)
         return (
             <>
-                {this.handleColor()}
                 <h1>Random Color Generator</h1>
-                <Box color={this.state.currentColor} />
+                <Box color={this.state.currentColor} previous={this.state.previous}/>
             </>
         )
     }
